@@ -3,10 +3,10 @@ require 'sinatra'
 
 enable :sessions
 
-if ENV['RACK_ENV'] == 'development'
-  set :database, {adapter: "sqlite3", database: "database.sqlite3"}
-else
+if ENV['RACK_ENV']
   ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
+else
+  set :database, {adapter: "sqlite3", database: "database.sqlite3"}
 end
 
 class User < ActiveRecord::Base
@@ -18,24 +18,7 @@ class Post < ActiveRecord::Base
 end
 
 get '/' do
-    p session
     erb :home
-end
-
-get '/users/signup' do
-    erb :'/users/signup'
-end
-
-post '/users/signup' do
-    @user = User.new(name: params['name'], email: params['email'], password: params['password'], bday: params['bday'])
-    @user.save
-    session[:user_id] = @user.id
-    redirect "/users/#{@user.id}"
-end
-
-get '/users/:id' do
-    @user = User.find(params['id'])
-    erb :'/users/profile'
 end
 
 get '/login' do
@@ -47,6 +30,7 @@ post '/login' do
     if user != nil
         if user.password == params['password']
             session[:user_id] = user.id
+            sleep 1
             redirect "/users/#{user.id}"
         end
     end
@@ -57,6 +41,28 @@ post '/logout' do
   redirect '/'
 end
 
+get '/users/signup' do
+  if session['user_id'] != nil
+      p 'User was already logged in'
+      redirect '/'
+  end
+  erb :'/users/signup'
+end
+
+post '/users/signup' do
+    @user = User.new(name: params['name'], email: params['email'], password: params['password'], bday: params['bday'])
+    @user.save
+    session[:user_id] = @user.id
+    sleep 1
+    redirect "/users/#{@user.id}"
+end
+
+get '/users/:id' do
+    @user = User.find(session['user_id'])
+    @posts = Post.where(user_id: session['user_id'])
+    erb :'/users/profile'
+end
+
 get '/posts/new' do
     if session['user_id'] == nil
         p 'Log in to post'
@@ -64,7 +70,7 @@ get '/posts/new' do
     end
     erb :'/posts/new'
 end
-#
+
 get '/posts/:id' do
     @post = Post.find(params['id'])
     erb :'/posts/view'
@@ -72,32 +78,39 @@ end
 
 post '/posts/new' do
     p "posted!"
-    @author = User.find_by(email: params['email'])
-    @post = Post.new(title: params['title'], content: params['content'], user_id: session['user_id'])
+    @post = Post.new(title: params['title'], imageURL: params['imageURL'], user_id: session['user_id'])
     @post.save
     redirect "/posts/#{@post.id}"
 end
 
+get '/posts/?' do
+    @posts = Post.all.reverse
+    erb :'/posts/all'
+end
 
+post '/delete_post/:id' do
+    @post = Post.find(params[:id]).delete
+    redirect'/'
+end
 
-# post 'posts/new' do
-#   @filename = params[:file][:filename]
+post '/deleteUser' do
+  @user = User.find(session['user_id'])
+  if @user != nil
+      @user.destroy
+      @user.save
+      session['user_id'] = nil
+      redirect '/'
+      erb :'users/myaccount'
+  end
+end
+
+# post '/save' do
+#   @post = Post.new(title: params['title'], image: params[:file][:filename], user_id: session['user_id'])
+#   @post.save
 #   file = params[:file][:tempfile]
-#     File.open("./public/#{@filename}", 'wb') do |f|
-#       f.write(file.read)
-#     end
-#   erb :'posts/view'
-# end
-
-# create_table :users do |t|
-#   t.string :name
-#   t.string :email
-#   t.string :password
-#   t.date :bday
-# end
-
-# create_table :posts do |t|
-#   t.string :title
-#   t.string :content
-#   t.integer :user_id
+#   File.open("./public/#{@post.image}", 'wb') do |f|
+#     f.write(file.read)
+#   end
+#   @posts = Post.all
+#   erb :'/posts/all'
 # end

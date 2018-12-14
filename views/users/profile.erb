@@ -1,3 +1,23 @@
-<h1><%= @user.name %></h1>
-<p><%= @user.email %></p>
-<p><%= @user.bday %></p>
+<head>
+  <script type="text/javascript">
+    function resizeLogin() {
+      document.getElementById('canvas').style.width = "700px";
+      document.getElementById('canvas').style.height = "700px";
+      }
+      window.onload = resizeLogin;
+  </script>
+</head>
+<body>
+  <form action=<%= '/deleteUser' %> method="POST">
+    <input type="submit" name="submit" value="delete">
+  </form>
+  <h1><%= @user.name %></h1>
+  <p><%= @user.email %></p>
+  <div class="row">
+    <% @posts.each do |post| %>
+    <div class="col-xs-4 imageThumb">
+      <a href="/posts/<%= post.id %>"><img src="<%= post.imageURL %>"></a>
+    </div>
+    <% end %>
+  </div>
+</body>

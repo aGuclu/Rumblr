@@ -1,12 +1,25 @@
+
+<head>
+  <script type="text/javascript">
+    function resizeLogin() {
+      document.getElementById('canvas').style.width = "300px";
+      document.getElementById('canvas').style.height = "300px";
+      }
+      window.onload = resizeLogin;
+  </script>
+</head>
+<body>
 <form action="/posts/new" method="POST">
   <input type="text" name="title" value="" placeholder="Title"><br>
-  <input type="text" name="content" value="" placeholder="Content"><br>
+  <input type="url" name="imageURL" value="" placeholder="Image URL"><br>
   <p>
-    <input type="submit" name="" value="Submit">
+    <input type="submit" name="" value="Submit" onclick="loginTransition()">
   </p>
 </form>
+</body>
 
-<!-- <form action="/save_image" method="POST" enctype="multipart/form-data">
+<!-- <form action="/save" method="POST" enctype="multipart/form-data">
+    <input type="text" name="title" value="" placeholder="Title">
     <input type="file" name="file">
     <input type="submit" value="Upload image">
 </form> -->

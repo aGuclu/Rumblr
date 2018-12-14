@@ -1,3 +1,10 @@
-<h1><%= @post.title %></h1>
-<h3><%= @author %></h3>
-<p><%= @post.content %></p>
+
+<% if session['user_id'] == @post.id %>
+  <form class="" action=<%= "/delete_post/#{@post.id}" %> method="POST">
+    <input type="submit" name="submit" value="delete">
+  </form>
+<% end %>
+<div class="smallBox">
+<a href=<%= "/users/#{@post.id}" %>><h1><%= @post.title %></h1></a><br>
+  <img src="<%= @post.imageURL %>">
+</div>

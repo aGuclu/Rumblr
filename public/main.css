@@ -1,0 +1,45 @@
+body {
+  background-color: #333;
+  font-family: serif;
+}
+
+#easel {
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#canvas {
+  background-color: #fff;
+  width: 700px;
+  height: 700px;
+  overflow: auto;
+}
+
+.smallBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 50px;
+}
+
+.imageThumb {
+  overflow: hidden;
+}
+.imageThumb img {
+  width: 100%;
+}
+
+.col-xs-4 {
+  padding: 0;
+}
+
+/* @media (max-width: 700px) {
+  #canvas {
+    width: 300px;
+    height: 300px;
+  }
+} */

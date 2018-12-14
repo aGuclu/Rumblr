@@ -1,0 +1,18 @@
+<head>
+  <script type="text/javascript">
+      function resizeLogin() {
+        document.getElementById('canvas').style.width = "700px";
+        document.getElementById('canvas').style.height = "700px";
+      }
+      window.onload = resizeLogin;
+  </script>
+</head>
+<body>
+  <div class="row">
+    <% @posts.each do |post| %>
+    <div class="col-xs-4 imageThumb">
+      <a href="/posts/<%= post.id %>"><img src="<%= post.imageURL %>"></a>
+    </div>
+    <% end %>
+  </div>
+</body>

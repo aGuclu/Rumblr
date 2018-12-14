@@ -5,12 +5,30 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title></title>
-<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/main.css">
+<script src="/main.js"></script>
 </head>
 <body>
-  <%= erb :nav %>
-  <%= yield %>
-  <%= erb :footer %>
-  <script src="main.js"></script>
+  <div id="easel">
+    <div id="canvas">
+      <div class="">
+        <button onclick="load_out_small('/')">Home</button>
+        <button onclick="load_out_big('/posts/?')">All Posts</button>
+        <% if session['user_id'] == nil %>
+        <button onclick="load_out_small('/login')">Log in</button>
+        <button onclick="load_out_small('/users/signup')">Sign up</button>
+        <% end%>
+        <% if session['user_id'] %>
+        <button onclick="load_out_small('/posts/new')">New Post</button>
+    
+        <form action="/logout" method="POST">
+          <input type="submit" name="" value="Log out">
+        </form>
+        <% end %>
+      </div>
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>

@@ -1,9 +1,20 @@
-<form action="/users/signup" method="POST">
-  <input type="text" name="name" value="" placeholder="Name"><br>
-  <input type="date" name="bday" value="" min="1918-12-31" max="2018-01-01"><br>
-  <input type="email" name="email" value="" placeholder="Email Address"><br>
-  <input type="password" name="password" value="" placeholder="Password"><br>
-  <p>
-    <input type="submit" name="" value="Submit">
-  </p>
-</form>
+<head>
+  <script type="text/javascript">
+    function resizeLogin() {
+      document.getElementById('canvas').style.width = "300px";
+      document.getElementById('canvas').style.height = "300px";
+    }
+    window.onload = resizeLogin;
+  </script>
+</head>
+<body>
+  <div class="smallBox">
+    <form action="/users/signup" method="POST">
+      <input type="text" name="name" value="" placeholder="Name"><br>
+      <input type="date" name="bday" value="" min="1918-12-31" max="2018-01-01"><br>
+      <input type="email" name="email" value="" placeholder="Email Address"><br>
+      <input type="password" name="password" value="" placeholder="Password"><br>
+      <input type="submit" name="" value="Submit" onclick="loginTransition()">
+    </form>
+  </div>
+</body>
