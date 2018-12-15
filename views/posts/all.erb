@@ -1,17 +1,20 @@
 <head>
   <script type="text/javascript">
-      function resizeLogin() {
+      function resize() {
         document.getElementById('canvas').style.width = "700px";
         document.getElementById('canvas').style.height = "700px";
       }
-      window.onload = resizeLogin;
+      window.onload = resize;
   </script>
 </head>
 <body>
-  <div class="row">
+  <div class="">
     <% @posts.each do |post| %>
-    <div class="col-xs-4 imageThumb">
-      <a href="/posts/<%= post.id %>"><img src="<%= post.imageURL %>"></a>
+    <div class="">
+      <% user = User.find(post.user_id)%>
+      <h2>By: <a href=<%= "/users/#{user.id}" %>><%= user.name%></a></h2>
+      <h3><%= post.created_at %></h3>
+      <p><%= post.content %></p>
     </div>
     <% end %>
   </div>

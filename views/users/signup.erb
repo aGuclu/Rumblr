@@ -1,17 +1,18 @@
 <head>
   <script type="text/javascript">
-    function resizeLogin() {
+    function resize() {
       document.getElementById('canvas').style.width = "300px";
       document.getElementById('canvas').style.height = "300px";
     }
-    window.onload = resizeLogin;
+    window.onload = resize;
   </script>
 </head>
 <body>
-  <div class="smallBox">
-    <form action="/users/signup" method="POST">
+  <div class="">
+    <h2>Login</h2>
+    <form action="/signup" method="POST">
       <input type="text" name="name" value="" placeholder="Name"><br>
-      <input type="date" name="bday" value="" min="1918-12-31" max="2018-01-01"><br>
+      <input type="date" name="bday" value=""><br>
       <input type="email" name="email" value="" placeholder="Email Address"><br>
       <input type="password" name="password" value="" placeholder="Password"><br>
       <input type="submit" name="" value="Submit" onclick="loginTransition()">

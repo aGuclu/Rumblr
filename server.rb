@@ -1,5 +1,5 @@
-require "sinatra/activerecord"
 require 'sinatra'
+require 'sinatra/activerecord'
 
 enable :sessions
 
@@ -10,30 +10,37 @@ else
 end
 
 class User < ActiveRecord::Base
-
+  has_many :posts, dependent: :destroy
 end
 
 class Post < ActiveRecord::Base
-
+  belongs_to :user
 end
 
+# before ['/post', '/posts', '/posts/:id', '/profile/?'] do
+#   if session['user_id'] == nil
+#     redirect '/'
+#   end
+# end
+
 get '/' do
-    erb :home
+  erb :home
 end
 
 get '/login' do
-   erb :'/users/login'
+  erb :'/users/login'
 end
 
 post '/login' do
-    user = User.find_by(email: params['email'])
-    if user != nil
-        if user.password == params['password']
-            session[:user_id] = user.id
-            sleep 1
-            redirect "/users/#{user.id}"
-        end
+  @user = User.find_by(email: params[:email])
+    if @user.password == params[:password]
+      session['user_id'] = @user.id
+      sleep 1
+      redirect '/users/#{@user.id}'
+    else
+      redirect '/login'
     end
+  erb :'/users/login'
 end
 
 post '/logout' do
@@ -41,68 +48,66 @@ post '/logout' do
   redirect '/'
 end
 
-get '/users/signup' do
+get '/signup' do
   if session['user_id'] != nil
-      p 'User was already logged in'
-      redirect '/'
+    redirect '/'
   end
   erb :'/users/signup'
 end
 
-post '/users/signup' do
-    @user = User.new(name: params['name'], email: params['email'], password: params['password'], bday: params['bday'])
-    @user.save
-    session[:user_id] = @user.id
-    sleep 1
-    redirect "/users/#{@user.id}"
+post '/signup' do
+  @user = User.new(name: params[:name], email: params[:email], password: params[:password], bday: params[:bday])
+  @user.save
+  session['user_id'] = @user.id
+  sleep 1
+  redirect '/users/#{@user.id}'
+  erb :'/users/signup'
 end
 
 get '/users/:id' do
-    @user = User.find(session['user_id'])
-    @posts = Post.where(user_id: session['user_id'])
-    erb :'/users/profile'
+  @user = User.find(params[:id])
+  erb :'/users/profile'
+end
+
+post '/users/:id' do
+  user = User.find(session[:user_id])
+  if user != nil
+    posts = Post.where(user_id: user.id)
+    posts.each do |post|
+      post.destroy
+    end
+    user.destroy
+    user.save
+    session['user_id'] = nil
+    redirect '/'
+  end
 end
 
 get '/posts/new' do
-    if session['user_id'] == nil
-        p 'Log in to post'
-        redirect '/login'
-    end
-    erb :'/posts/new'
-end
-
-get '/posts/:id' do
-    @post = Post.find(params['id'])
-    erb :'/posts/view'
+  if session['user_id'] == nil
+      p 'Log in to post'
+      redirect '/'
+  end
+  erb :'/posts/new'
 end
 
 post '/posts/new' do
-    p "posted!"
-    @post = Post.new(title: params['title'], imageURL: params['imageURL'], user_id: session['user_id'])
-    @post.save
-    redirect "/posts/#{@post.id}"
+  @post = Post.new(user_id: session['user_id'], title: params[:title], content: params[:content])
+  @post.save
+  redirect '/posts/all'
 end
 
 get '/posts/?' do
-    @posts = Post.all.reverse
-    erb :'/posts/all'
+  @posts = Post.all.reverse
+  erb :'/posts/all'
 end
 
-post '/delete_post/:id' do
-    @post = Post.find(params[:id]).delete
-    redirect'/'
+post '/posts/:id' do
+  @post = Post.find(params[:id])
+  @post.destroy
+  redirect '/users/#{session[:user_id]}'
 end
 
-post '/deleteUser' do
-  @user = User.find(session['user_id'])
-  if @user != nil
-      @user.destroy
-      @user.save
-      session['user_id'] = nil
-      redirect '/'
-      erb :'users/myaccount'
-  end
-end
 
 # post '/save' do
 #   @post = Post.new(title: params['title'], image: params[:file][:filename], user_id: session['user_id'])

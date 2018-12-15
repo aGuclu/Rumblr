@@ -2,8 +2,9 @@ class CreatePosts < ActiveRecord::Migration[5.2]
   def change
     create_table :posts do |t|
       t.string :title
-      t.string :imageURL
+      t.string :content
       t.integer :user_id
+      t.datetime :created_at
     end
   end
 end

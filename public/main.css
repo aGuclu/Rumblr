@@ -24,17 +24,95 @@ body {
   justify-content: center;
   width: 100%;
   padding: 50px;
+  text-align: center;
 }
 
-.imageThumb {
-  overflow: hidden;
-}
-.imageThumb img {
-  width: 100%;
+.btn,
+.btn:link,
+.btn:visited,
+button,
+input[type=button],
+input[type=reset],
+input[type=submit],
+input {
+  background-color: white;
+  border: .1rem solid #333;
+  color: #333;
 }
 
-.col-xs-4 {
-  padding: 0;
+.btn:focus,
+.btn:link:focus,
+.btn:visited:focus,
+button:focus,
+input[type='button']:focus,
+input[type='reset']:focus,
+input[type='submit']:focus {
+  background-color: #333;
+  border: 0.1rem solid #000;
+  outline: 0;
+  color: #fff;
+}
+
+.btn:hover,
+.btn:link:hover,
+.btn:visited:hover,
+button:hover,
+input[type='button']:hover,
+input[type='reset']:hover,
+input[type='submit']:hover {
+  background-color: #333;
+  border: 0.1rem solid #000;
+  outline: 0;
+  color: #fff;
+}
+
+input[type='email']:focus,
+input[type='number']:focus,
+input[type='password']:focus,
+input[type='search']:focus,
+input[type='tel']:focus,
+input[type='text']:focus,
+input[type='url']:focus,
+input[type='color']:focus,
+input[type='date']:focus,
+input[type='month']:focus,
+input[type='week']:focus,
+input[type='datetime']:focus,
+input[type='datetime-local']:focus,
+input:not([type]):focus,
+textarea:focus,
+select:focus {
+  border-color: grey;
+	outline: 0;
+
+}
+
+a,
+a:link,
+a:visited {
+  color: #333;
+  text-decoration: none;
+}
+
+a:hover,
+a:link:hover,
+a:visited:hover {
+  color: grey;
+  text-decoration: none;
+}
+
+a:focus,
+a:link:focus,
+a:visited:focus {
+  color: grey;
+  text-decoration: none;
+}
+
+a:active,
+a:link:active,
+a:visited:active {
+  color: grey;
+  text-decoration: none;
 }
 
 /* @media (max-width: 700px) {
