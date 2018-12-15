@@ -1,5 +1,5 @@
 console.log("SUCCESS");
-// 
+//
 // document.getElementById('newpost').addEventListener('click', load_out_big);
 // document.getElementById('signup').addEventListener('click', load_out_small);
 // document.getElementById('login').addEventListener('click', load_out_small);

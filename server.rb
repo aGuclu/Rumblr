@@ -17,14 +17,23 @@ class Post < ActiveRecord::Base
   belongs_to :user
 end
 
-# before ['/post', '/posts', '/posts/:id', '/profile/?'] do
-#   if session['user_id'] == nil
-#     redirect '/'
-#   end
-# end
-
 get '/' do
   erb :home
+end
+
+get '/users/signup' do
+  if session['user_id'] != nil
+    redirect '/'
+  end
+  erb :'/users/signup'
+end
+
+post '/users/signup' do
+    @user = User.new(name: params['name'], email: params['email'], password: params['password'], bday: params['bday'])
+    @user.save
+    session[:user_id] = @user.id
+    sleep 1
+    redirect "/users/#{@user.id}"
 end
 
 get '/login' do
@@ -32,34 +41,19 @@ get '/login' do
 end
 
 post '/login' do
-  @user = User.find_by(email: params[:email])
-    if @user.password == params[:password]
-      session['user_id'] = @user.id
-      sleep 1
-      redirect '/users/#{@user.id}'
-    else
-      redirect '/'
+    user = User.find_by(email: params['email'])
+    if user != nil
+        if user.password == params['password']
+            session[:user_id] = user.id
+            sleep 1
+            redirect "/users/#{user.id}"
+        end
     end
 end
 
 post '/logout' do
   session['user_id'] = nil
   redirect '/'
-end
-
-get '/signup' do
-  if session['user_id'] != nil
-    redirect '/'
-  end
-  erb :'/users/signup'
-end
-
-post '/signup' do
-  @user = User.new(name: params[:name], email: params[:email], password: params[:password], bday: params[:bday])
-  @user.save
-  session['user_id'] = @user.id
-  sleep 1
-  redirect '/users/#{@user.id}'
 end
 
 get '/users/:id' do
@@ -92,7 +86,7 @@ end
 post '/posts/new' do
   @post = Post.new(user_id: session['user_id'], title: params[:title], content: params[:content])
   @post.save
-  redirect '/posts/all'
+  redirect '/posts/?'
 end
 
 get '/posts/?' do

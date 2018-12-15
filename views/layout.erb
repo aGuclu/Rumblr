@@ -23,7 +23,7 @@
         </div>
         <div class="">
         <% if session['user_id'] == nil %>
-          <a id="signup" href="/signup" class="btn" >Sign Up</a>
+          <a id="signup" href="/users/signup" class="btn" >Sign Up</a>
           <a id="login" href="/login" class="btn">Log In</a>
         <% else %>
           <a id="myacct" href= <%= "/users/#{session[:user_id]}" %> class="btn">My Account</a>

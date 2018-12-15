@@ -17,14 +17,14 @@
   <% end %>
   <% post = Post.where(user_id: params[:id]) %>
   <% if post != nil %>
-  <% @posts.each do |post| %>
-    <div class="">
-      <a href="/posts/<%= post.id %>"><img src="<%= post.imageURL %>"></a>
-      <% if post.user_id ==session[:user_id] %>
-      <form class="" action=<%= "/posts/#{post.id}" %> method="POST">
-        <input type="submit" name="" value="Delete Post">
-      </form>
-      <% end %>
+  <% post.each do |post| %>
+  <div class="">
+    <% user = User.find(post.user_id)%>
+    <h2>By: <a href=<%= "/users/#{user.id}" %>><%= user.name%></a></h2>
+    <h3><%= post.created_at %></h3>
+    <p><%= post.content %></p>
+  </div>
+  <% end %>
     </div>
   <% end %>
   </div>
