@@ -38,9 +38,8 @@ post '/login' do
       sleep 1
       redirect '/users/#{@user.id}'
     else
-      redirect '/login'
+      redirect '/'
     end
-  erb :'/users/login'
 end
 
 post '/logout' do
@@ -61,7 +60,6 @@ post '/signup' do
   session['user_id'] = @user.id
   sleep 1
   redirect '/users/#{@user.id}'
-  erb :'/users/signup'
 end
 
 get '/users/:id' do
