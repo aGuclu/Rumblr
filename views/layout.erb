@@ -12,25 +12,19 @@
 <body>
   <div id="easel">
     <div id="canvas">
-        <div class="">
-          <a href="/"><h1>Rumblr</h1></a>
-        </div>
-        <div class="">
-          <% if session['user_id'] != nil %>
-          <!-- <a href="/posts" class="btn">My Posts</a> -->
-          <a id="newpost" href="/posts/new" class="btn" style=>New Post</a>
-          <% end %>
-        </div>
-        <div class="">
+        <a href="/"><h1>Rumblr</h1></a>
+        <% if session['user_id'] != nil %>
+          <a id="newpost" href="/posts/?" class="btn" onclick="load_out_big()">All Posts</a>
+          <a id="newpost" href="/posts/new" class="btn" onclick="load_out_big()">New Post</a>
+        <% end %>
         <% if session['user_id'] == nil %>
-          <a id="signup" href="/users/signup" class="btn" >Sign Up</a>
-          <a id="login" href="/login" class="btn">Log In</a>
+          <a id="signup" href="/users/signup" class="btn" onclick="load_out_small()">Sign Up</a>
+          <a id="login" href="/login" class="btn" onclick="load_out_small()">Log In</a>
         <% else %>
-          <a id="myacct" href= <%= "/users/#{session[:user_id]}" %> class="btn">My Account</a>
+          <a id="myacct" href="/users/<%=session[:user_id]%>" class="btn">My Account</a>
           <a id="logout" href="/logout" class="btn">Logout</a>
         <% end %>
-        </div>
-      <%= yield %>
+        <%= yield %>
     </div>
   </div>
 </body>
