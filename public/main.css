@@ -82,12 +82,12 @@ body {
 }
 
 .padright {
-  width: 50% !important;
+  width: 50%;
   padding-right:.5rem;
 }
 
 .padleft {
-  width: 50% !important; 
+  width: 50%;
   padding-left:.5rem;
 }
 
