@@ -21,6 +21,31 @@ get '/' do
   erb :home
 end
 
+get '/login' do
+  erb :'/users/login'
+end
+
+post '/login' do
+  user = User.find_by(email: params['email'])
+  if user != nil
+    if user.password == params['password']
+      session[:user_id] = user.id
+      sleep 1
+      redirect "/users/#{user.id}"
+    else
+      redirect "/"
+    end
+  else
+    redirect "/"
+  end
+end
+
+post '/logout' do
+  session['user_id'] = nil
+  sleep 1
+  redirect '/'
+end
+
 get '/users/signup' do
   if session['user_id'] != nil
     redirect '/'
@@ -29,31 +54,16 @@ get '/users/signup' do
 end
 
 post '/users/signup' do
+  if params[:password] == params[:confirm]
     @user = User.new(name: params['name'], email: params['email'], password: params['password'], bday: params['bday'])
     @user.save
     session[:user_id] = @user.id
     sleep 1
     redirect "/users/#{@user.id}"
-end
-
-get '/login' do
-  erb :'/users/login'
-end
-
-post '/login' do
-    user = User.find_by(email: params['email'])
-    if user != nil
-        if user.password == params['password']
-            session[:user_id] = user.id
-            sleep 1
-            redirect "/users/#{user.id}"
-        end
-    end
-end
-
-post '/logout' do
-  session['user_id'] = nil
-  redirect '/'
+  else
+    @alert = "Passwords must match"
+  end
+  erb :'/users/signup'
 end
 
 get '/users/:id' do
@@ -61,7 +71,12 @@ get '/users/:id' do
   erb :'/users/profile'
 end
 
-post '/users/:id' do
+get '/users/:id/delete' do
+  @user = User.find(params[:id])
+  erb :'/users/delete'
+end
+
+post '/users/:id/delete' do
   user = User.find(session[:user_id])
   if user != nil
     posts = Post.where(user_id: user.id)
@@ -94,10 +109,17 @@ get '/posts/?' do
   erb :'/posts/all'
 end
 
+get '/posts/:id' do
+  @post = Post.find(params[:id])
+  erb :'/posts/delete'
+end
+
 post '/posts/:id' do
   @post = Post.find(params[:id])
   @post.destroy
-  redirect '/users/#{session[:user_id]}'
+  @post.save
+  sleep 1
+  redirect '/posts/?'
 end
 
 

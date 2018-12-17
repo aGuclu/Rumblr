@@ -1,0 +1,20 @@
+<head>
+  <script type="text/javascript">
+    function resize() {
+      document.getElementById('canvas').style.width = "400px";
+      document.getElementById('canvas').style.height = "400px";
+    }
+    window.onload = resize;
+  </script>
+</head>
+<body>
+  <h3>Delete the following post?</h3>
+  <h4><%= @post.title %></h4>
+  <p><%= @post.created_at %></p>
+  <div class="content">
+    <a class="btn" onclick="load_out_big('/posts/?')">Cancel</a>
+    <form action="/posts/<%= @post.id %>" method="POST">
+      <input id="delete_post" type="submit" value="Delete post" onclick="transition()">
+    </form>
+  </div>
+</body>

@@ -1,10 +1,9 @@
 body {
-  background-color: #333;
-  font-family: serif;
+  background-color: #f5f5f5;
 }
 
 #easel {
-  background-color: #333;
+  background-color: #f5f5f5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,10 +11,66 @@ body {
 }
 
 #canvas {
-  background-color: whitesmoke;
+  position: relative;
+  background-color: #f5f5f5;
   width: 700px;
   height: 700px;
   overflow: auto;
+  border: 0.1rem solid #333;
+  border-radius: 0.4rem;
+  padding: 10px;
+}
+
+#nav {
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  margin-left: -10px;
+  border-top: 0.1rem solid #333;
+}
+
+#login,
+#logout {
+  margin-left: 10px;
+}
+
+#delete_account:hover,
+#delete_account:focus,
+#delete_account:active,
+#delete_post:hover,
+#delete_post:focus,
+#delete_post:active  {
+  background-color: #ff3333;
+}
+
+.right {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.alert::placeholder {
+  color: #ff3333;
+  opacity: 1;
+}
+
+.alert:-ms-input-placeholder {
+  color: #ff3333;
+}
+
+.alert::-ms-input-placeholder {
+  color: #ff3333;
+}
+
+h1 {
+  font-size: 6rem;
+}
+
+h2 {
+  cursor: pointer;
+  margin-bottom: 0;
+  font-size: 3rem;
+  padding: 10px 0px 10px 0px;
 }
 
 .btn,
@@ -26,9 +81,10 @@ input[type=button],
 input[type=reset],
 input[type=submit],
 input {
-  background-color: white;
+  background-color: #fff;
   border: .1rem solid #333;
   color: #333;
+  margin-bottom: 0px;
 }
 
 .btn:focus,
@@ -73,7 +129,7 @@ input[type='datetime-local']:focus,
 input:not([type]):focus,
 textarea:focus,
 select:focus {
-  border-color: grey;
+  border-color: #666;
 	outline: 0;
 }
 
@@ -87,22 +143,37 @@ a:visited {
 a:hover,
 a:link:hover,
 a:visited:hover {
-  color: grey;
+  color: #666;
   text-decoration: none;
 }
 
 a:focus,
 a:link:focus,
 a:visited:focus {
-  color: grey;
+  color: #666;
   text-decoration: none;
 }
 
 a:active,
 a:link:active,
 a:visited:active {
-  color: grey;
+  color: #666;
   text-decoration: none;
+}
+
+#textarea {
+  min-height: 6.5rem;
+  width: 100%;
+  appearance: none;
+  background-color: transparent;
+  box-shadow: none;
+  border: 0.1rem solid #333;
+  font-size: 1.6rem;
+  border-radius: .4rem;
+  box-sizing: inherit;
+  padding: .6rem 1.0rem;
+  margin-bottom: 1.5rem;
+  color: #333;
 }
 
 /* @media (max-width: 700px) {

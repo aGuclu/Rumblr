@@ -2,8 +2,8 @@
 <head>
   <script type="text/javascript">
     function resize() {
-      document.getElementById('canvas').style.width = "400px";
-      document.getElementById('canvas').style.height = "400px";
+      document.getElementById('canvas').style.width = "700px";
+      document.getElementById('canvas').style.height = "700px";
       }
       window.onload = resize;
   </script>
@@ -11,7 +11,7 @@
 <body>
 <form action="/posts/new" method="POST">
   <input type="text" name="title" value="" placeholder="Title"><br>
-  <input type="textarea" name="content" value="" placeholder="Content"><br>
+  <input id="textarea" type="textarea" name="content" value="" placeholder="Content"><br>
   <p>
     <input type="submit" name="" value="Submit" onclick="loginTransition()">
   </p>

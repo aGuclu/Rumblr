@@ -9,13 +9,19 @@
 </head>
 <body>
   <div class="">
-    <h2>Login</h2>
+    <h3>Sign up</h3>
     <form action="/users/signup" method="POST">
-      <input type="text" name="name" value="" placeholder="Name"><br>
+      <input type="text" name="name" value="" placeholder="Username" required><br>
       <input type="date" name="bday" value=""><br>
-      <input type="email" name="email" value="" placeholder="Email Address"><br>
-      <input type="password" name="password" value="" placeholder="Password"><br>
-      <input type="submit" name="" value="Submit" onclick="loginTransition()">
+      <input type="email" name="email" value="" placeholder="Email Address" required><br>
+      <% if @alert != nil %>
+        <input class="alert" type="password" name="password" value="" placeholder="Passwords must match" required><br>
+        <input class="alert" type="password" name="confirm" value="" placeholder="Passwords must match" required><br>
+      <% else %>
+        <input type="password" name="password" value="" placeholder="Password" required><br>
+        <input type="password" name="confirm" value="" placeholder="Confirm password" required><br>
+      <% end %>
+      <input type="submit" name="" value="Submit" onclick="transition()">
     </form>
   </div>
 </body>

@@ -12,19 +12,7 @@
 <body>
   <div id="easel">
     <div id="canvas">
-        <a href="/"><h1>Rumblr</h1></a>
-        <% if session['user_id'] != nil %>
-          <a id="newpost" href="/posts/?" class="btn" onclick="load_out_big()">All Posts</a>
-          <a id="newpost" href="/posts/new" class="btn" onclick="load_out_big()">New Post</a>
-        <% end %>
-        <% if session['user_id'] == nil %>
-          <a id="signup" href="/users/signup" class="btn" onclick="load_out_small()">Sign Up</a>
-          <a id="login" href="/login" class="btn" onclick="load_out_small()">Log In</a>
-        <% else %>
-          <a id="myacct" href="/users/<%=session[:user_id]%>" class="btn">My Account</a>
-          <a id="logout" href="/logout" class="btn">Logout</a>
-        <% end %>
-        <%= yield %>
+      <%= yield %>
     </div>
   </div>
 </body>
