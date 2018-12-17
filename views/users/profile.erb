@@ -8,31 +8,36 @@
   </script>
 </head>
 <body>
-  <h1><%= @user.name %>'s posts</h1>
-  <% if session['user_id'] == @user.id %>
-    <p><%= @user.email %></p>
-    <a id="delete_account" class="btn" onclick="load_out_small('/users/<%= @user.id %>/delete')">Delete account</a>
-  <% end %>
-  <% post = Post.where(user_id: params[:id]) %>
-  <% if post != nil %>
-    <% post.each do |post| %>
-      <div class="">
-        <% user = User.find(post.user_id)%>
-        <h2>By: <a href=<%= "/users/#{user.id}" %>><%= user.name%></a></h2>
-        <h3>Created: <%= post.created_at %></h3>
-        <p><%= post.content %></p>
-        <% if session['user_id'] == @user.id %>
-          <a id="delete_post" class="btn" onclick="load_out_small('/posts/<%= post.id %>')">Delete post</a>
-        <% end %>
-      </div>
+  <div class="content">
+    <h1><%= @user.name %>'s posts</h1>
+    <% if session['user_id'] == @user.id %>
+      <p><%= @user.email %></p>
+      <a id="delete_account" class="btn" onclick="load_out_small('/users/<%= @user.id %>/delete')">Delete account</a>
     <% end %>
-  <% end %>
-  <div id="nav">
+    <% post = Post.where(user_id: params[:id]) %>
+    <% if post != nil %>
+      <% post.each do |post| %>
+        <div class="row gallery">
+          <div class="column">
+            <% user = User.find(post.user_id)%>
+            <h2>By: <a href=<%= "/users/#{user.id}" %>><%= user.name%></a></h2>
+            <small><p>Created on: <%= post.created_at %></p></small>
+            <p><%= post.content %></p>
+            <% if session['user_id'] == @user.id %>
+              <a id="delete_post" class="btn" onclick="load_out_small('/posts/<%= post.id %>')">Delete post</a>
+            <% end %>
+          </div>
+        </div>
+        <br>
+      <% end %>
+    <% end %>
+  </div>
+  <div id="nav" style="position:sticky;width:103%">
     <div class="row">
       <div class="column">
         <a onclick="load_out_big('/posts/?')"><h2>Rumblr</h2></a>
       </div>
-      <div class="column right">
+      <div class="column right padded">
         <% if session['user_id'] == nil %>
           <a id="signup" class="btn" onclick="load_out_small('/users/signup')">Sign Up</a>
           <a id="login" class="btn" onclick="load_out_small('/login')">Log In</a>

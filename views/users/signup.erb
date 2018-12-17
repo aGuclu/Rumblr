@@ -8,20 +8,37 @@
   </script>
 </head>
 <body>
-  <div class="">
+  <div class="content">
     <h3>Sign up</h3>
     <form action="/users/signup" method="POST">
       <input type="text" name="name" value="" placeholder="Username" required><br>
       <input type="date" name="bday" value=""><br>
-      <input type="email" name="email" value="" placeholder="Email Address" required><br>
+      <% if @alert2 != nil %>
+        <input class="alert" type="email" name="email" value="" placeholder="<%= @alert2 %>" required><br>
+      <% else %>
+        <input type="email" name="email" value="" placeholder="Email Address" required><br>
+      <% end %>
       <% if @alert != nil %>
-        <input class="alert" type="password" name="password" value="" placeholder="Passwords must match" required><br>
-        <input class="alert" type="password" name="confirm" value="" placeholder="Passwords must match" required><br>
+        <input class="alert" type="password" name="password" value="" placeholder="<%= @alert %>" required><br>
+        <input class="alert" type="password" name="confirm" value="" placeholder="<%= @alert %>" required><br>
       <% else %>
         <input type="password" name="password" value="" placeholder="Password" required><br>
         <input type="password" name="confirm" value="" placeholder="Confirm password" required><br>
       <% end %>
       <input type="submit" name="" value="Submit" onclick="transition()">
     </form>
+  </div>
+  <div id="nav">
+    <div class="row">
+      <div class="column">
+        <a onclick="load_out_big('/posts/?')"><h2>Rumblr</h2></a>
+      </div>
+      <div class="column right padded">
+        <% if session['user_id'] == nil %>
+          <a id="signup" class="btn" onclick="load_out_small('/users/signup')">Sign Up</a>
+          <a id="login" class="btn" onclick="load_out_small('/login')">Log In</a>
+        <% end %>
+      </div>
+    </div>
   </div>
 </body>

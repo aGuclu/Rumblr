@@ -11,10 +11,16 @@
   <h3>Delete account?</h3>
   <h4><%= @user.name %></h4>
   <p><%= @user.email %></p>
-  <div class="content">
-    <a class="btn" onclick="load_out_small('/users/<%= @user.id %>')">Cancel</a>
-    <form action="/users/<%= @user.id %>/delete" method="POST">
-      <input id="delete_account" type="submit" value="Delete account" onclick="transition()">
-    </form>
+  <div id="anchor">
+    <div class="row">
+      <div class="column padded">
+        <a class="btn" onclick="load_out_small('/users/<%= @user.id %>')">Cancel</a>
+      </div>
+      <div class="column right padded">
+        <form action="/users/<%= @user.id %>/delete" method="POST">
+          <input id="delete_account" type="submit" value="Delete account" onclick="transition()">
+        </form>
+      </div>
+    </div>
   </div>
 </body>

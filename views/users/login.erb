@@ -8,12 +8,33 @@
   </script>
 </head>
 <body>
-  <div class="">
-    <h2 class="">Login</h2>
+  <div class="content">
+    <h3 class="">Login</h3>
     <form action="/login" method="post">
+      <% if @alert2 != nil %>
+      <input class="alert" type="text" name="email" placeholder="<%= @alert2 %>" required>
+      <% else %>
       <input type="text" name="email" placeholder="Email" required>
+      <% end %>
+      <% if @alert != nil %>
+      <input class="alert" type="password" name="password" placeholder="<%= @alert %>" required>
+      <% else %>
       <input type="password" name="password" placeholder="Password" required>
-      <input type="submit" value="Submit" onclick="loginTransition()">
+      <% end %>
+      <input type="submit" value="Submit" onclick="transition()">
     </form>
+  </div>
+  <div id="nav">
+    <div class="row">
+      <div class="column">
+        <a onclick="load_out_big('/posts/?')"><h2>Rumblr</h2></a>
+      </div>
+      <div class="column right padded">
+        <% if session['user_id'] == nil %>
+          <a id="signup" class="btn" onclick="load_out_small('/users/signup')">Sign Up</a>
+          <a id="login" class="btn" onclick="load_out_small('/login')">Log In</a>
+        <% end %>
+      </div>
+    </div>
   </div>
 </body>

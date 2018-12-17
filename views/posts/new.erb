@@ -9,13 +9,33 @@
   </script>
 </head>
 <body>
-<form action="/posts/new" method="POST">
-  <input type="text" name="title" value="" placeholder="Title"><br>
-  <input id="textarea" type="textarea" name="content" value="" placeholder="Content"><br>
-  <p>
-    <input type="submit" name="" value="Submit" onclick="loginTransition()">
-  </p>
-</form>
+  <div class="content">
+    <form action="/posts/new" method="POST">
+      <input type="text" name="title" value="" placeholder="Title"><br>
+      <input id="textarea" type="textarea" name="content" value="" placeholder="Post something" ><br>
+      <p>
+        <input type="submit" name="" value="Submit" onclick="loginTransition()">
+      </p>
+    </form>
+  </div>
+  <div id="nav">
+    <div class="row">
+      <div class="column">
+        <a onclick="load_out_big('/posts/?')"><h2>Rumblr</h2></a>
+      </div>
+      <div class="column right padded">
+        <% if session['user_id'] == nil %>
+          <a id="signup" class="btn" onclick="load_out_small('/users/signup')">Sign Up</a>
+          <a id="login" class="btn" onclick="load_out_small('/login')">Log In</a>
+        <% else %>
+          <a id="newpost" class="btn" onclick="load_out_big('/posts/new')">New Post</a>
+          <form id="logout" action="/logout" method="POST">
+             <input type="submit" name="" value="Logout" onclick="loginTransition()">
+          </form>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </body>
 
 <!-- <form action="/save" method="POST" enctype="multipart/form-data">

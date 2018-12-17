@@ -11,12 +11,11 @@
   <div class="content">
     <a onclick="load_out_big('/posts/?')"><h1>Rumblr</h1></a>
     <p>Ruby + Tumblr</p>
-    <p>A photoless photography blog</p>
+    <p>Photography blog</p>
     <div id="nav">
       <div class="row">
-        <div class="column">
-        </div>
-        <div class="column right">
+        <div class="column"></div>
+        <div class="column right padded">
           <% if session['user_id'] == nil %>
             <a id="signup" class="btn" onclick="load_out_small('/users/signup')">Sign Up</a>
             <a id="login" class="btn" onclick="load_out_small('/login')">Log In</a>

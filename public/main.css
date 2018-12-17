@@ -18,15 +18,19 @@ body {
   overflow: auto;
   border: 0.1rem solid #333;
   border-radius: 0.4rem;
-  padding: 10px;
+  padding: 10px 10px 0px 10px;
 }
 
-#nav {
+#nav,
+#anchor {
   width: 100%;
   position: absolute;
   bottom: 0px;
   margin-left: -10px;
   border-top: 0.1rem solid #333;
+  background-color: #f5f5f5;
+  z-index: 1;
+  margin-top: 10px;
 }
 
 #login,
@@ -43,9 +47,26 @@ body {
   background-color: #ff3333;
 }
 
+#textarea {
+  width: 100%;
+  appearance: none;
+  background-color: transparent;
+  box-shadow: none;
+  border: 0.1rem solid #333;
+  font-size: 1.5rem;
+  border-radius: .4rem;
+  box-sizing: inherit;
+  padding: .6rem 1.0rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
 .right {
   display: flex;
   justify-content: flex-end;
+}
+
+.padded {
   padding: 10px;
 }
 
@@ -84,7 +105,7 @@ input {
   background-color: #fff;
   border: .1rem solid #333;
   color: #333;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .btn:focus,
@@ -92,20 +113,12 @@ input {
 .btn:visited:focus,
 button:focus,
 input[type='button']:focus,
-input[type='reset']:focus,
-input[type='submit']:focus {
-  background-color: #333;
-  border: 0.1rem solid #000;
-  outline: 0;
-  color: #fff;
-}
-
+input[type='submit']:focus,
 .btn:hover,
 .btn:link:hover,
 .btn:visited:hover,
 button:hover,
 input[type='button']:hover,
-input[type='reset']:hover,
 input[type='submit']:hover {
   background-color: #333;
   border: 0.1rem solid #000;
@@ -113,19 +126,23 @@ input[type='submit']:hover {
   color: #fff;
 }
 
+input[type='email'],
+input[type='number'],
+input[type='password'],
+input[type='text'],
+input[type='date'],
+input:not([type]),
+textarea,
+select {
+  font-size: 1rem;
+  height: 3rem;
+}
+
 input[type='email']:focus,
 input[type='number']:focus,
 input[type='password']:focus,
-input[type='search']:focus,
-input[type='tel']:focus,
 input[type='text']:focus,
-input[type='url']:focus,
-input[type='color']:focus,
 input[type='date']:focus,
-input[type='month']:focus,
-input[type='week']:focus,
-input[type='datetime']:focus,
-input[type='datetime-local']:focus,
 input:not([type]):focus,
 textarea:focus,
 select:focus {
@@ -142,39 +159,17 @@ a:visited {
 
 a:hover,
 a:link:hover,
-a:visited:hover {
-  color: #666;
-  text-decoration: none;
-}
-
+a:visited:hover,
 a:focus,
 a:link:focus,
-a:visited:focus {
-  color: #666;
-  text-decoration: none;
-}
-
+a:visited:focus,
 a:active,
 a:link:active,
-a:visited:active {
+a:visited:active  {
   color: #666;
   text-decoration: none;
 }
 
-#textarea {
-  min-height: 6.5rem;
-  width: 100%;
-  appearance: none;
-  background-color: transparent;
-  box-shadow: none;
-  border: 0.1rem solid #333;
-  font-size: 1.6rem;
-  border-radius: .4rem;
-  box-sizing: inherit;
-  padding: .6rem 1.0rem;
-  margin-bottom: 1.5rem;
-  color: #333;
-}
 
 /* @media (max-width: 700px) {
   #canvas {

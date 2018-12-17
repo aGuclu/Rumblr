@@ -33,11 +33,12 @@ post '/login' do
       sleep 1
       redirect "/users/#{user.id}"
     else
-      redirect "/"
+      @alert = "Incorrect Password"
     end
   else
-    redirect "/"
+    @alert2 = "User does not exist"
   end
+  erb :'/users/login'
 end
 
 post '/logout' do
@@ -54,14 +55,19 @@ get '/users/signup' do
 end
 
 post '/users/signup' do
-  if params[:password] == params[:confirm]
-    @user = User.new(name: params['name'], email: params['email'], password: params['password'], bday: params['bday'])
-    @user.save
-    session[:user_id] = @user.id
-    sleep 1
-    redirect "/users/#{@user.id}"
+  user = User.find_by(email: params['email'])
+  if user == nil
+    if params[:password] == params[:confirm]
+      @user = User.new(name: params['name'], email: params['email'], password: params['password'], bday: params['bday'])
+      @user.save
+      session[:user_id] = @user.id
+      sleep 1
+      redirect "/users/#{@user.id}"
+    else
+      @alert = "Passwords must match"
+    end
   else
-    @alert = "Passwords must match"
+    @alert2 = "Email already in use"
   end
   erb :'/users/signup'
 end
