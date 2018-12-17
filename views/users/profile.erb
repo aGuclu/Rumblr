@@ -10,7 +10,7 @@
 <body>
   <div class="content">
     <div class="profile_header padded">
-      <h3><%= @user.name %>'s posts</h3>
+      <h3><%= @user.first_name %>'s posts</h3>
       <% if session['user_id'] == @user.id %>
         <p><%= @user.email %></p>
         <a id="delete_account" class="btn" onclick="load_out_small('/users/<%= @user.id %>/delete')">Delete account</a>
@@ -22,7 +22,7 @@
         <div class="row gallery">
           <div class="column">
             <% user = User.find(post.user_id)%>
-            <h4>By: <a href=<%= "/users/#{user.id}" %>><%= user.name%></a></h4>
+            <h4>By: <a href=<%= "/users/#{user.id}" %>><%= "#{user.first_name} #{user.last_name}" %></a></h4>
             <small><p>Created on: <%= post.created_at %></p></small>
             <p><%= post.content %></p>
             <% if session['user_id'] == @user.id %>

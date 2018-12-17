@@ -58,7 +58,7 @@ post '/users/signup' do
   user = User.find_by(email: params['email'])
   if user == nil
     if params[:password] == params[:confirm]
-      @user = User.new(name: params['name'], email: params['email'], password: params['password'], bday: params['bday'])
+      @user = User.new(first_name: params['first_name'], last_name: params['last_name'], email: params['email'], password: params['password'], bday: params['bday'])
       @user.save
       session[:user_id] = @user.id
       sleep 1

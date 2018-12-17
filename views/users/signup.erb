@@ -11,7 +11,14 @@
   <div class="content">
     <h3>Sign up</h3>
     <form action="/users/signup" method="POST">
-      <input type="text" name="name" value="" placeholder="Username" required><br>
+      <div class="row">
+        <div class="padright">
+          <input type="text" name="first_name" value="" placeholder="First name" required><br>
+        </div>
+        <div class="padleft">
+          <input type="text" name="last_name" value="" placeholder="Last name" required><br>
+        </div>
+      </div>
       <input type="date" name="bday" value=""><br>
       <% if @alert2 != nil %>
         <input class="alert" type="email" name="email" value="" placeholder="<%= @alert2 %>" required><br>
