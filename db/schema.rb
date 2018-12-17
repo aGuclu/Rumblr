@@ -13,10 +13,11 @@
 ActiveRecord::Schema.define(version: 2018_12_15_043856) do
 
   create_table "posts", force: :cascade do |t|
+    t.integer "user_id"
     t.string "title"
     t.string "content"
-    t.integer "user_id"
     t.datetime "created_at"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
