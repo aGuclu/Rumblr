@@ -9,11 +9,12 @@
 </head>
 <body>
   <div class="content">
+    <h3>Recent posts</h3>
     <% @posts.each do |post| %>
     <div class="gallery">
       <% user = User.find(post.user_id)%>
-      <h2>By: <a href=<%= "/users/#{user.id}" %>><%= user.name%></a></h2>
-      <h3><%= post.created_at %></h3>
+      <h4>By: <a href=<%= "/users/#{user.id}" %>><%= user.name%></a></h4>
+      <small><p>Created on: <%= post.created_at %></p></small>
       <p><%= post.content %></p>
     </div>
     <br>

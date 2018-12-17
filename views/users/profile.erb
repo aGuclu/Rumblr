@@ -9,18 +9,20 @@
 </head>
 <body>
   <div class="content">
-    <h1><%= @user.name %>'s posts</h1>
-    <% if session['user_id'] == @user.id %>
-      <p><%= @user.email %></p>
-      <a id="delete_account" class="btn" onclick="load_out_small('/users/<%= @user.id %>/delete')">Delete account</a>
-    <% end %>
+    <div class="profile_header padded">
+      <h3><%= @user.name %>'s posts</h3>
+      <% if session['user_id'] == @user.id %>
+        <p><%= @user.email %></p>
+        <a id="delete_account" class="btn" onclick="load_out_small('/users/<%= @user.id %>/delete')">Delete account</a>
+      <% end %>
+    </div>
     <% post = Post.where(user_id: params[:id]) %>
     <% if post != nil %>
       <% post.each do |post| %>
         <div class="row gallery">
           <div class="column">
             <% user = User.find(post.user_id)%>
-            <h2>By: <a href=<%= "/users/#{user.id}" %>><%= user.name%></a></h2>
+            <h4>By: <a href=<%= "/users/#{user.id}" %>><%= user.name%></a></h4>
             <small><p>Created on: <%= post.created_at %></p></small>
             <p><%= post.content %></p>
             <% if session['user_id'] == @user.id %>
