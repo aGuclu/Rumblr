@@ -1,9 +1,11 @@
 body {
-  background-color: #f5f5f5;
+  background: rgb(255,255,255);
+  background: linear-gradient(130deg, rgba(255,255,255,1) 0%, rgba(225,225,225,1) 27%, rgba(215,215,215,1) 100%);
 }
 
 #easel {
-  background-color: #f5f5f5;
+  background: rgb(255,255,255);
+  background: linear-gradient(130deg, rgba(255,255,255,1) 0%, rgba(225,225,225,1) 27%, rgba(215,215,215,1) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,9 +18,10 @@ body {
   width: 700px;
   height: 700px;
   overflow: auto;
-  border: 0.1rem solid #333;
-  border-radius: 0.4rem;
+  /* border: 0.1rem solid #333; */
+  border-radius: 0.9rem;
   padding: 10px 10px 0px 10px;
+  box-shadow: 25px 50px 50px #ccc;
 }
 
 #nav,
